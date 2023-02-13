@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-8">
+        <div class="product-cate">
+            <h5>Categories</h5>
+            <ul>
+                <li><a class="active" href="{% url "store:store" %}">All</a></li>
+                {% for category in categories %}
+                    <li><a href="{% url "store:products_by_category" category.slug %}">{{ category.category_name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="sort-view">
+
+        </div>
+    </div>
+</div>

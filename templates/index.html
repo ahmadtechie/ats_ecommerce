@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    ATS Ecommerce
+{% endblock %}
+
+{% block content %}
+    <!-- Banner Start -->
+    <section class="page-banner shop-full-banner">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="round-shape"></span>
+                    <h2 class="banner-title">Have a Great Shopping Experience</h2>
+                    <div class="bread-crumb"><a href="i{% url "home" %}">Home</a> / Popular products</div>
+                    <div class="banner-img">
+                        <img src="{% static "images/shop/banner.png" %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner End -->
+
+    <!-- Shop Section Start -->
+    <section class="shop-fullwidth">
+        <div class="container-fluid">
+{#            {% include "includes/categories_nav.html" %}#}
+            <div class="row">
+                {% for product in products %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-shop-product">
+                        <div class="sp-thumb">
+                            <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt="" class=""></a>
+                            <div class="pro-badge">
+                                <p class="sale">Sale</p>
+                            </div>
+                        </div>
+                        <div class="sp-details">
+                            <h4>{{ product.product_name|title }}</h4>
+                            <div class="product-price clearfix">
+                                    <span class="price">
+                                        <del><span><span
+                                                class="woocommerce-Price-currencySymbol">₦</span>{{ product.price|add:"-5" }}.00</span></del>
+                                        <ins><span><span
+                                                class="woocommerce-Price-currencySymbol">₦</span>{{ product.price }}..</span></ins>
+                                    </span>
+                            </div>
+                            <div class="sp-details-hover">
+                                <a class="sp-cart" href="{% url "carts:add_cart" product.id %}"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
+                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+{% endblock %}
+
+
+</body>
+</html>

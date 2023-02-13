@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        {% block title %}
+            ATS Ecommerce
+        {% endblock %}
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Include All CSS -->
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/themewar-icons.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/flaticon.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/animate.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/owl.carousel.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/owl.theme.default.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/settings.css" %}">
+    <link rel="stylesheet" href="{% static "css/lightcase.css" %}">
+    <link rel="stylesheet" href="{% static "css/preset.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/ignore_in_wp.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/theme.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/responsive.css" %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    {% block script_links %}
+    {% endblock %}
+
+    {% block css_files %}
+    {% endblock %}
+    <!-- End Include All CSS -->
+
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="{% static "images/favicon.png" %}">
+    <!-- Favicon Icon -->
+</head>
+<body>
+<!-- Preloader Start -->
+<div class="preloader" id="preloader">
+    <div class="la-ball-scale-multiple la-2x">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- Preloader End -->
+
+{% include "includes/header.html" %}
+
+
+{% block content %}
+{% endblock %}
+
+{% include "includes/footer.html" %}
+{% block scripts %}
+{% endblock %}
+</body>
+</html>

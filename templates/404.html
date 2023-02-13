@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Page Not Found
+{% endblock %}
+
+{% block content %}
+    <!-- Banner Start -->
+        <section class="page-banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <span class="round-shape"></span>
+                        <h2 class="banner-title">404 - Not found</h2>
+                        <div class="bread-crumb"><a href="{% url "home" %}">Home</a> / 404</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Banner End -->
+
+        <!-- 404 Section Start -->
+        <section class="error-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <div class="content-404 text-center">
+                            <img src="{% static "images/404.png" %}" alt="">
+                            <h2>Something went wrong</h2>
+                            <a href="{% url "home" %}" class="goru-btn">Go Back Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 404 Section End -->
+{% endblock %}
+

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    ATS Store
+{% endblock %}
+
+{% block content %}
+    <section class="page-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="round-shape"></span>
+                    {% if 'q' in request.path %}
+                        <h2 class="title-page">Search Result</h2>
+                    {% else %}
+                        <h2 class="banner-title">Shop - {{ category|default_if_none:"All" }}</h2>
+                    {% endif %}
+                    <div class="bread-crumb"><a href="{% url "home" %}">Home</a> / shop</div>
+                    <div class="banner-img">
+                        {#                        <img src="{% static "images/shop/banner2.png" %}" alt="">#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner End -->
+
+    <!-- Shop Section Start -->
+    <section class="shop-left-sidebar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="shop-sidebar">
+                        <aside class="widget widget-categories">
+                            <h3 class="widget-title">Categories</h3>
+                            <ul>
+                                <li><a class="active" href="{% url "store:store" %}">All</a></li>
+                                {% for category in categories %}
+                                    <li>
+                                        <a href="{{ category.get_absolute_url }}">{{ category.category_name }}</a>
+                                    </li>
+                                {% endfor %}
+{#                                <li>#}
+{#                                    <a href="{% url "store:ascending" %}">low to high</a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="{% url "store:ascending" %}">high to low</a>#}
+{#                                </li>#}
+                            </ul>
+                        </aside>
+                        <aside class="widget">
+
+                        </aside>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="container-fluid">
+                        {% include "includes/categories_nav.html" %}
+                    </div>
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-shop-product">
+                                    <div class="sp-thumb">
+                                        <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}"
+                                                                                      alt="" class=""></a>
+                                        <div class="pro-badge">
+                                            <p class="sale">Sale</p>
+                                        </div>
+                                    </div>
+                                    <div class="sp-details">
+                                        <h4>
+                                            <a href="{{ product.get_absolute_url }}">{{ product.product_name|title }}</a>
+                                        </h4>
+                                        <div class="product-price clearfix">
+                            <span class="price">
+                            <del><span><span
+                                    class="woocommerce-Price-currencySymbol">₦</span>{{ product.price|add:"-5" }}</span></del>
+                                                <ins><span><span
+                                                        class="woocommerce-Price-currencySymbol">₦</span>{{ product.price }}
+                            </span></ins>
+                            </span>
+                                        </div>
+                                        <div class="sp-details-hover">
+                                            <a class="sp-cart" href="{% url "carts:add_cart" product.id %}"><i
+                                                    class="twi-cart-plus"></i><span>Add to cart</span></a>
+                                            <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        {% if products.has_other_pages %}
+                            <div class="col-lg-10 offset-lg-1 col-md-12 mt-20">
+                                <div class="goru-pagination text-center clearfix">
+                                    {% if products.has_previous %}
+                                        <a class="prev" href="?page={{ product.previous_page_number }}"><i
+                                                class="twi-long-arrow-alt-left"></i></a>
+                                    {% else %}
+                                        <a class="prev" href="#"><i class="twi-long-arrow-alt-left"></i></a>
+                                    {% endif %}
+                                    {% for i in products.paginator.page_range %}
+                                        {% if products.number == i %}
+                                            <span class="current">{{ i }}</span>
+                                        {% else %}
+                                            <a href="?page={{ i }}">{{ i }}</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if products.has_next %}
+                                        <a class="next" href="?page={{ products.next_page_number }}"><i
+                                                class="twi-long-arrow-alt-right"></i></a>
+                                    {% else %}
+                                        <a class="next" href="#"><i class="twi-long-arrow-alt-right"></i></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+{% endblock %}

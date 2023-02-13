@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <!-- Banner Start -->
+    <section class="page-banner mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="round-shape"></span>
+                    <h2 class="banner-title">Edit Profile</h2>
+                    <div class="bread-crumb"><a href="{% url "home" %}">Home</a> / Profile
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner End -->
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section class="section-conten padding-y bg mb-5">
+        {% include "includes/alerts.html" %}
+
+        <div class="container">
+            <div class="row">
+                {% include "includes/dashboard_sidebar.html" %}
+                <main class="col-md-9">
+                    <article class="card">
+                        <header class="card-header">
+                            <strong class="d-inline-block mr-3">Edit Your Profile:</strong>
+                            <span>{% if user.first_name %}{{ user.first_name }} {{ user.last_name }}{% else %}
+                                {{ user.username }}{% endif %}</span>
+                        </header>
+                        <div class="card-body">
+                            <div><img src="{{ user_profile.profile_picture.url }}" width="100" style="border-radius: 50px;" alt="Profile Picture"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form action="{% url "accounts:edit_profile" %}" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="woocommerce-billing-fields">
+                                                    <div class="row">
+                                                        <p class="col-lg-6">
+                                                            <label>First Name</label>
+                                                            {{user_form.first_name}}
+                                                        </p>
+                                                        <p class="col-lg-6">
+                                                            <label>Last Name</label>
+                                                            {{ user_form.last_name }}
+                                                        </p>
+                                                        <p class="col-lg-12">
+                                                            <label>City / Town</label>
+                                                            {{ profile_form.city }}
+                                                        </p>
+                                                        <p class="col-lg-6">
+                                                            <label>Profile Picture</label>
+                                                            {{ profile_form.profile_picture }}
+                                                        </p>
+                                                        <p class="col-lg-6">
+                                                            <label>Phone Number</label>
+                                                            {{ user_form.phone_number }}
+                                                        </p>
+                                                        <div class="col-lg-6">
+                                                            <label>Country</label>
+                                                            {{ profile_form.country }}
+                                                        </div>
+                                                        <p class="col-lg-6">
+                                                            <label>State</label>
+                                                            {{ profile_form.state }}
+                                                        </p>
+                                                        <p class="col-lg-12">
+                                                            <label>Address Line 1</label>
+                                                            {{ profile_form.address_line_1 }}
+                                                        </p>
+                                                        <p class="col-lg-12">
+                                                            <label>Address Line 2</label>
+                                                            {{ profile_form.address_line_2 }}
+                                                        </p>
+                                                        <button type="submit" class="add-to-cart-btn ml-3">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div> <!-- row.// -->
+                        </div> <!-- card-body .// -->
+                    </article> <!-- order-group.// -->
+                </main>
+            </div> <!-- row.// -->
+        </div>
+
+
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

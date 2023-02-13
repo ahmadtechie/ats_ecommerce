@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <!-- Login Register Section Start -->
+    <section class="login-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    {% if request.user.is_authenticated %}
+                        <h3 class="sec-title mb-4">You are already logged in!</h3>
+                    {% else %}
+                        <h3 class="sec-title mb-4">Login your account</h3>
+                        <div class="login-form">
+                            <form action="{% url "accounts:login" %}" method="post">
+                                {% include "includes/alerts.html" %}
+                                {% csrf_token %}
+                                <input type="text" name="email" placeholder="User Email">
+                                <input type="password" name="password" placeholder="Your Password">
+                                <div class="keep-log-regi">
+                                    <a href="{% url "accounts:forgotPassword" %}">Forgot your password?</a>
+                                </div>
+                                <div class="keep-log-regi">
+                                    <a href="{% url "accounts:register" %}">Sign up</a></div>
+
+                                <input type="submit" name="submit" value="login">
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Login Register Section End -->
+{% endblock %}

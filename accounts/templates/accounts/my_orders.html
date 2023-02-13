@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <!-- Banner Start -->
+    <section class="page-banner  mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="round-shape"></span>
+                    <h2 class="banner-title">Purchases</h2>
+                    <div class="bread-crumb"><a href="{% url "home" %}">Home</a> / <a
+                            href="{% url "accounts:edit_profile" %}">Profile</a> / My Orders
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner End -->
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section class="section-conten padding-y bg mb-5">
+        {% include "includes/alerts.html" %}
+
+        <div class="container">
+            <div class="row">
+                {% include "includes/dashboard_sidebar.html" %}
+                <main class="col-md-9">
+                    <article class="card">
+                        <header class="card-header">
+                            <strong class="d-inline-block mr-3">Your Order history:</strong>
+                            <span>{% if user.first_name %}{{ user.first_name }} {{ user.last_name }}{% else %}
+                                {{ user.username }}{% endif %}</span>
+                        </header>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Order #</th>
+                                            <th scope="col">Billing Name</th>
+                                            <th scope="col">Phone</th>
+                                            <th scope="col">Order Total</th>
+                                            <th scope="col">Date</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for order in orders %}
+                                            <tr>
+                                                <th scope="row"><a
+                                                        href="{% url "accounts:order_detail" order.order_number %}">{{ order.order_number }}</a>
+                                                </th>
+                                                <td>{{ order.full_name }}</td>
+                                                <td>{{ order.phone }}</td>
+                                                <td>₦{{ order.order_total }}</td>
+                                                <td>{{ order.created_at }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- row.// -->
+                        </div> <!-- card-body .// -->
+                    </article> <!-- order-group.// -->
+                </main>
+            </div> <!-- row.// -->
+        </div>
+
+
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

@@ -1,0 +1,74 @@
+{% load static %}
+
+<!-- Header Start -->
+<header class="header-01 inner-header fix-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                <div class="logo">
+                    <a href="{% url "home" %}">
+                        <img src="{% static "images/logo.png" %}" alt="ATS"/>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <nav class="mainmenu mobile-menu">
+                    <div class="mobile-btn">
+                        <a href="javascript: void(0);"><span>Menu</span><i class="twi-bars"></i></a>
+                    </div>
+                    <ul>
+                        <li class="active menu-item-has-children">
+                            <a href="{% url "home" %}">Home</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="javascript:void(0);">Categories</a>
+                            <ul class="sub-menu">
+                                <li><a href="{% url "store:store" %}">All</a></li>
+                                {% for category in links %}
+                                    <li>
+                                        <a href="{% url "store:products_by_category" category.slug %}">{{ category.category_name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li><a href="{% url "store:store" %}">Store</a></li>
+                        <li><a href="{% url "contact" %}">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="header-cogs">
+                    <a class="search search-toggles" href="javascript:void(0);"><i class="twi-search"></i></a>
+                    {% if request.user.is_authenticated %}
+                        <a class="user-login" href="{% url "accounts:dashboard" %}">Dashboard</a>
+                        <a class="user-login" href="{% url "accounts:logout" %}">Logout</a>
+                        <a class="user-login" href="{% url "accounts:edit_profile" %}">{{ request.user.username }}</a>
+                        <a class="carts" href="{% url "carts:cart" %}"><span id="cart_counter">{{ cart_count }}</span><img src="{% static "images/cart.png" %}" alt=""></a>
+                    {% else %}
+                        <a class="user-login" href="{% url "accounts:logout" %}">login</a>
+                        <a class="carts" href="{% url "carts:cart" %}"><span id="cart_counter">{{ cart_count }}</span><img src="{% static "images/cart.png" %}" alt=""></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header End -->
+
+<!-- Popup Search -->
+<section class="popup-search-sec">
+    <div class="popup-search-overlay"></div>
+    <div class="overlay-popup">
+        <a href="javascript:void(0);" class="search-closer">x</a><!-- Close Popup Btn -->
+        <div class="middle-search">
+            <div class="popup-search-form"><!-- Search Form Start -->
+                <form method="get" action="{% url "store:search" %}">
+                    <input class="text-center" type="search" name="q" id="q" placeholder="Powered by Elasticsearch">
+                    <button type="submit"><i class="twi-search"></i></button>
+                </form><!-- Search Form End -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Popup Search -->
+
